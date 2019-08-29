@@ -1,11 +1,10 @@
 package solution;
 
-import java.awt.*;
 import java.util.List;
 
 class BacktrackingSolution implements Solution {
 
-    private BacktrackingSolution() {
+    private BacktrackingSolution() throws InstantiationException {
     }
 
     static SudokuBoard solve(SudokuBoard board) {

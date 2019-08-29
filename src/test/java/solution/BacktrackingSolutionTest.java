@@ -12,9 +12,7 @@ class BacktrackingSolutionTest {
     @Test
     void Should_ThrowIllegalArgumentException_When_SolveOnNull() {
         assertThrows(NullPointerException.class,
-                     () -> {
-                         BacktrackingSolution.solve(null);
-                     });
+                     () ->  BacktrackingSolution.solve(null));
     }
 
     @Test

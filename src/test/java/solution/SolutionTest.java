@@ -30,9 +30,7 @@ class SolutionTest {
 
     @Test
     void Should_ThrowUnsupportedOperationException_When_CallingSolutionOnInterface() {
-        assertThrows(UnsupportedOperationException.class, () -> {
-            Solution.solve(board);
-        });
+        assertThrows(UnsupportedOperationException.class, () -> {Solution.solve(board);});
     }
 
     @Test

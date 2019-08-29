@@ -1,6 +1,5 @@
 package solution;
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
@@ -129,11 +128,11 @@ public class EnumBoard implements SudokuBoard {
     }
 
     public SudokuCharacter getCharacter(Point coordinates) {
-        return board[coordinates.x][coordinates.y];
+        return board[coordinates.getX()][coordinates.getY()];
     }
 
     private SudokuCharacter[] getRowCharacters(Point coordinates) {
-        return board[coordinates.x];
+        return board[coordinates.getX()];
     }
 
     private SudokuCharacter[] getColumnCharacters(Point coordinates) {
@@ -141,7 +140,7 @@ public class EnumBoard implements SudokuBoard {
         int iterator = 0;
 
         for (int column = 0; column < GRID_DIMENSION; column++) {
-            columnCharacters[iterator] = board[iterator][coordinates.y];
+            columnCharacters[iterator] = board[iterator][coordinates.getY()];
             iterator++;
         }
         return columnCharacters;
@@ -154,7 +153,7 @@ public class EnumBoard implements SudokuBoard {
 
         for (int row = 0; row < BOX_DIMENSIONS; row++) {
             for (int column = 0; column < BOX_DIMENSIONS; column++) {
-                boxCharacters[iterator] = board[row + boxCoordinates.x][column + boxCoordinates.y];
+                boxCharacters[iterator] = board[row + boxCoordinates.getX()][column + boxCoordinates.getY()];
                 iterator++;
             }
         }
@@ -163,8 +162,8 @@ public class EnumBoard implements SudokuBoard {
 
     private Point getBoxCoordinates(Point variableCoordinate) {
         return new Point(
-                variableCoordinate.x / BOX_DIMENSIONS * BOX_DIMENSIONS,
-                variableCoordinate.y / BOX_DIMENSIONS * BOX_DIMENSIONS
+                variableCoordinate.getX() / BOX_DIMENSIONS * BOX_DIMENSIONS,
+                variableCoordinate.getY() / BOX_DIMENSIONS * BOX_DIMENSIONS
         );
     }
 
@@ -177,10 +176,10 @@ public class EnumBoard implements SudokuBoard {
         }
         if (!isCoordinatesLegal(coordinates)) {
             throw new IllegalArgumentException(
-                    "Coordinates [" + coordinates.x + "," + coordinates.y + "] are not writable."
+                    "Coordinates [" + coordinates.getX() + "," + coordinates.getY() + "] are not writable."
             );
         }
-        board[coordinates.x][coordinates.y] = inputCharacter;
+        board[coordinates.getX()][coordinates.getY()] = inputCharacter;
     }
 
     private boolean isCoordinatesLegal(Point potentialCoordinates) {

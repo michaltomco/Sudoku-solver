@@ -23,12 +23,12 @@ class SudokuCharacterTest {
 
 
     @Test
-    void Should_GetNotGetNull_When_GetEmptyCharacter() {
+    void Should_NotGetNull_When_GetEmptyCharacter() {
         assertDoesNotThrow((Executable) () -> SudokuCharacter.getEmptyCharacter());
     }
 
     @Test
-    void Should_Throw_When_GetEnumByCharWithNonViableCharacter() {
+    void Should_ThrowIllegalArgumentException_When_GetEnumByCharWithNonViableCharacter() {
         char queried = Character.MIN_VALUE;
         Set<Character> viableChars = SudokuCharacter.getAllViableChars();
         if (!viableChars.contains(queried)) {

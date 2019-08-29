@@ -1,11 +1,7 @@
 package solution;
 
-import java.awt.Point;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-
-import solution.Solution;
-import solution.BacktrackingSolution;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,10 +32,7 @@ class EnumBoardTest {
     void Should_ThrowIllegalArgumentException_When_ArrayDimensions0x0() {
         char[][] empty = new char[0][0];
         Exception thrown =
-                assertThrows(IllegalArgumentException.class,
-                             () -> {
-                                 new EnumBoard(empty);
-                             });
+                assertThrows(IllegalArgumentException.class, () -> new EnumBoard(empty));
         assertTrue(thrown.getMessage().contains("Illegal board dimensions. Sudoku board needs to be of 9x9 dimensions."));
     }
 
@@ -47,10 +40,7 @@ class EnumBoardTest {
     void Should_ThrowIllegalArgumentException_When_ArrayDimensions0x9() {
         char[][] empty = new char[0][9];
         Exception thrown =
-                assertThrows(IllegalArgumentException.class,
-                             () -> {
-                                 new EnumBoard(empty);
-                             });
+                assertThrows(IllegalArgumentException.class, () -> new EnumBoard(empty));
         assertTrue(thrown.getMessage().contains("Illegal board dimensions. Sudoku board needs to be of 9x9 dimensions."));
     }
 
@@ -58,10 +48,7 @@ class EnumBoardTest {
     void Should_ThrowIllegalArgumentException_When_ArrayDimensions9x0() {
         char[][] empty = new char[9][0];
         Exception thrown =
-                assertThrows(IllegalArgumentException.class,
-                             () -> {
-                                 new EnumBoard(empty);
-                             });
+                assertThrows(IllegalArgumentException.class, () -> new EnumBoard(empty));
         assertTrue(thrown.getMessage().contains("Illegal board dimensions. Sudoku board needs to be of 9x9 dimensions."));
     }
 
@@ -69,10 +56,7 @@ class EnumBoardTest {
     void Should_ThrowIllegalArgumentException_When_ArrayDimensions9x10() {
         char[][] empty = new char[9][10];
         Exception thrown =
-                assertThrows(IllegalArgumentException.class,
-                             () -> {
-                                 new EnumBoard(empty);
-                             });
+                assertThrows(IllegalArgumentException.class, () -> new EnumBoard(empty));
         assertTrue(thrown.getMessage().contains("Illegal board dimensions. Sudoku board needs to be of 9x9 dimensions."));
     }
 
@@ -80,10 +64,7 @@ class EnumBoardTest {
     void Should_ThrowIllegalArgumentException_When_ArrayDimensions10x9() {
         char[][] empty = new char[10][9];
         Exception thrown =
-                assertThrows(IllegalArgumentException.class,
-                             () -> {
-                                 new EnumBoard(empty);
-                             });
+                assertThrows(IllegalArgumentException.class, () -> new EnumBoard(empty));
         assertTrue(thrown.getMessage().contains("Illegal board dimensions. Sudoku board needs to be of 9x9 dimensions."));
     }
 
@@ -91,10 +72,7 @@ class EnumBoardTest {
     void Should_ThrowIllegalArgumentException_When_ArrayDimensions10x10() {
         char[][] empty = new char[10][10];
         Exception thrown =
-                assertThrows(IllegalArgumentException.class,
-                             () -> {
-                                 new EnumBoard(empty);
-                             });
+                assertThrows(IllegalArgumentException.class, () -> new EnumBoard(empty));
         assertTrue(thrown.getMessage().contains("Illegal board dimensions. Sudoku board needs to be of 9x9 dimensions."));
     }
 
@@ -107,10 +85,7 @@ class EnumBoardTest {
             }
         }
         Exception thrown =
-                assertThrows(IllegalArgumentException.class,
-                             () -> {
-                                 new EnumBoard(array);
-                             });
+                assertThrows(IllegalArgumentException.class, () -> new EnumBoard(array));
         assertTrue(thrown.getMessage().contains("Input board contains illegal characters."));
     }
 
@@ -124,10 +99,7 @@ class EnumBoardTest {
         }
         array[0][0] = '0';
         Exception thrown =
-                assertThrows(IllegalArgumentException.class,
-                             () -> {
-                                 new EnumBoard(array);
-                             });
+                assertThrows(IllegalArgumentException.class, () -> new EnumBoard(array));
         assertTrue(thrown.getMessage().contains("Input board contains illegal characters."));
     }
 
@@ -144,10 +116,7 @@ class EnumBoardTest {
         array[7] = new char[]{'.', '.', '.', '4', '1', '9', '.', '.', '5'};
         array[8] = new char[]{'.', '.', '.', '.', '8', '.', '.', '7', '9'};
         Exception thrown =
-                assertThrows(IllegalArgumentException.class,
-                             () -> {
-                                 new EnumBoard(array);
-                             });
+                assertThrows(IllegalArgumentException.class, () -> new EnumBoard(array));
         assertTrue(thrown.getMessage().contains("The sudoku provided is not solvable."));
     }
 
@@ -164,10 +133,7 @@ class EnumBoardTest {
         array[7] = new char[]{'.', '.', '.', '4', '1', '9', '.', '.', '5'};
         array[8] = new char[]{'.', '.', '.', '.', '8', '.', '.', '7', '9'};
         Exception thrown =
-                assertThrows(IllegalArgumentException.class,
-                             () -> {
-                                 new EnumBoard(array);
-                             });
+                assertThrows(IllegalArgumentException.class, () -> new EnumBoard(array));
         assertTrue(thrown.getMessage().contains("The sudoku provided is not solvable."));
     }
 
@@ -184,10 +150,7 @@ class EnumBoardTest {
         array[7] = new char[]{'.', '.', '.', '4', '1', '9', '.', '.', '2'};
         array[8] = new char[]{'.', '.', '.', '.', '8', '.', '.', '7', '9'};
         Exception thrown =
-                assertThrows(IllegalArgumentException.class,
-                             () -> {
-                                 new EnumBoard(array);
-                             });
+                assertThrows(IllegalArgumentException.class, () -> new EnumBoard(array));
         assertTrue(thrown.getMessage().contains("The sudoku provided is not solvable."));
     }
 
@@ -230,23 +193,20 @@ class EnumBoardTest {
 
     @Test
     void Should_BeFalse_When_EqualsOnDifferentClass() {
-        assertNotEquals(unsolvedBoard, new Point());
+        assertNotEquals(unsolvedBoard, new Point(0, 0));
     }
 
     @Test
     void Should_BeEqualAndSameHashCode_When_HasEqualBoards() {
         SudokuBoard secondBoard = new EnumBoard(unsolvedArray);
         assertEquals(unsolvedBoard, secondBoard);
-        assertEquals(unsolvedBoard.hashCode(),secondBoard.hashCode());
+        assertEquals(unsolvedBoard.hashCode(), secondBoard.hashCode());
     }
 
     @Test
     void Should_ThrowNullPointerException_When_GetIncrementedCoordinatesIsNull() {
         Exception thrown =
-                assertThrows(NullPointerException.class,
-                             () -> {
-                                 unsolvedBoard.getIncrementedCharacter(null);
-                             });
+                assertThrows(NullPointerException.class, () -> unsolvedBoard.getIncrementedCharacter(null));
         assertTrue(thrown.getMessage().contains("Coordinates cannot be null."));
     }
 
@@ -254,9 +214,7 @@ class EnumBoardTest {
     void Should_ThrowIllegalArgumentException_When_WriteToBoardValueIsNull() {
         Exception thrown =
                 assertThrows(NullPointerException.class,
-                             () -> {
-                                 unsolvedBoard.writeCharacterTo(null, new Point(0, 0));
-                             });
+                             () -> unsolvedBoard.writeCharacterTo(null, new Point(0, 0)));
         assertTrue(thrown.getMessage().contains("Input character cannnot be null."));
     }
 
@@ -264,9 +222,7 @@ class EnumBoardTest {
     void Should_ThrowNullPointerException_When_WriteToBoardCoordinatesIsNull() {
         Exception thrown =
                 assertThrows(NullPointerException.class,
-                             () -> {
-                                 unsolvedBoard.writeCharacterTo(SudokuCharacter.EIGHT, null);
-                             });
+                             () -> unsolvedBoard.writeCharacterTo(SudokuCharacter.EIGHT, null));
         assertTrue(thrown.getMessage().contains("Coordinates cannnot be null."));
     }
 
@@ -274,9 +230,7 @@ class EnumBoardTest {
     void Should_ThrowNullPointerException_When_WriteToBoardCoordinatesIsOutOfBounds() {
         Exception thrown =
                 assertThrows(IllegalArgumentException.class,
-                             () -> {
-                                 unsolvedBoard.writeCharacterTo(SudokuCharacter.EIGHT, new Point(10, 10));
-                             });
+                             () -> unsolvedBoard.writeCharacterTo(SudokuCharacter.EIGHT, new Point(10, 10)));
         assertTrue(thrown.getMessage().contains("Coordinates [10,10] are not writable."));
     }
 }
